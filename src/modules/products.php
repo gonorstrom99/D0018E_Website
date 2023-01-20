@@ -1,7 +1,12 @@
 <?php
 
-function some_function() {
-  $link = mysqli_connect("localhost", "Malkolm", "malle123", "D0018E");
+require_once "Database_manager.php";
+
+/**
+ * @throws Exception
+ */
+function some_function(): string {
+  $link = Database_manager::get_connection();
   $sql = "SELECT * FROM product_table";
   $result = mysqli_query($link, $sql);
   $return = "";

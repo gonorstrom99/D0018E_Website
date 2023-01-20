@@ -11,9 +11,10 @@
   </component>
   <component name="PhpIncludePathManager">
     <include_path>
-      <path value="$PROJECT_DIR$/../../../../Program Files/php" />
+      <path value="$PROJECT_DIR$/src" />
     </include_path>
   </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
   <component name="PhpRuntimeConfiguration">
     <extensions>
       <extension name="Ev" enabled="false" />
@@ -25,11 +26,12 @@
       <extension name="amqp" enabled="false" />
       <extension name="apache" enabled="false" />
       <extension name="apcu" enabled="false" />
+      <extension name="bcmath" enabled="false" />
       <extension name="bz2" enabled="false" />
+      <extension name="calendar" enabled="false" />
       <extension name="cassandra" enabled="false" />
       <extension name="couchbase" enabled="false" />
       <extension name="cubrid" enabled="false" />
-      <extension name="curl" enabled="false" />
       <extension name="dba" enabled="false" />
       <extension name="decimal" enabled="false" />
       <extension name="dio" enabled="false" />
@@ -38,7 +40,6 @@
       <extension name="exif" enabled="false" />
       <extension name="fann" enabled="false" />
       <extension name="ffmpeg" enabled="false" />
-      <extension name="fileinfo" enabled="false" />
       <extension name="ftp" enabled="false" />
       <extension name="gd" enabled="false" />
       <extension name="gearman" enabled="false" />
@@ -51,6 +52,7 @@
       <extension name="grpc" enabled="false" />
       <extension name="http" enabled="false" />
       <extension name="ibm_db2" enabled="false" />
+      <extension name="iconv" enabled="false" />
       <extension name="igbinary" enabled="false" />
       <extension name="imagick" enabled="false" />
       <extension name="imap" enabled="false" />
@@ -62,7 +64,6 @@
       <extension name="libevent" enabled="false" />
       <extension name="libsodium" enabled="false" />
       <extension name="mailparse" enabled="false" />
-      <extension name="mbstring" enabled="false" />
       <extension name="mcrypt" enabled="false" />
       <extension name="memcache" enabled="false" />
       <extension name="memcached" enabled="false" />
@@ -79,15 +80,12 @@
       <extension name="oauth" enabled="false" />
       <extension name="oci8" enabled="false" />
       <extension name="odbc" enabled="false" />
-      <extension name="openssl" enabled="false" />
-      <extension name="pcntl" enabled="false" />
       <extension name="pdflib" enabled="false" />
       <extension name="pdo_ibm" enabled="false" />
       <extension name="pdo_mysql" enabled="false" />
       <extension name="pdo_pgsql" enabled="false" />
       <extension name="pdo_sqlite" enabled="false" />
       <extension name="pgsql" enabled="false" />
-      <extension name="posix" enabled="false" />
       <extension name="pspell" enabled="false" />
       <extension name="pthreads" enabled="false" />
       <extension name="rar" enabled="false" />
@@ -114,14 +112,12 @@
       <extension name="wddx" enabled="false" />
       <extension name="win32service" enabled="false" />
       <extension name="wincache" enabled="false" />
-      <extension name="xdebug" enabled="false" />
       <extension name="xhprof" enabled="false" />
       <extension name="xlswriter" enabled="false" />
       <extension name="xmlrpc" enabled="false" />
       <extension name="xsl" enabled="false" />
       <extension name="yaml" enabled="false" />
       <extension name="zend" enabled="false" />
-      <extension name="zip" enabled="false" />
       <extension name="zmq" enabled="false" />
     </extensions>
   </component>

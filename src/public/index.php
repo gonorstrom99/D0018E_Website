@@ -1,5 +1,5 @@
 <?php
-require("../modules/process_products.php");
+require_once  "../modules/products.php";
 
 $header = array(
   "title" => "Webshop",
@@ -12,4 +12,5 @@ $header = array(
 
 $product_table_result = some_function();
 
-require("../templates/index.php");
+require_once "../templates/index.phtml";
+

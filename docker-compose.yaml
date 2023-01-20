@@ -37,6 +37,7 @@ services:
     restart: always
     volumes:
       - ./src:/usr/share/nginx/html:ro
+      - ./config.ini:/usr/share/nginx/html/config.ini:ro
     environment:
       VIRTUAL_HOST: d0018e.falk-net.se
       LETSENCRYPT_HOST: d0018e.falk-net.se
