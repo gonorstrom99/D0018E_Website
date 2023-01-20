@@ -18,14 +18,13 @@ class Config {
    */
   private static function load(): void
   {
-    self::$config = parse_ini_file(__DIR__. '/config_template.ini', true);
+    self::$config = parse_ini_file('config_template.ini', true);
 
-    if (is_file(__DIR__. '../config.ini')) {
-      $user_config = parse_ini_file(__DIR__. '../config.ini', true);
-      if ($user_config) {
-        self::$config = array_merge(self::$config, $user_config);
-      }
+    $user_config = parse_ini_file('../config.ini', true);
+    if ($user_config) {
+      self::$config = array_merge(self::$config, $user_config);
     }
+
   }
 
   /**
