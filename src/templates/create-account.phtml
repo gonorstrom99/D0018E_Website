@@ -1,0 +1,22 @@
+<?php require_once "header.phtml"?>
+
+<h2>Create an account</h2>
+
+<p>Please submit Full name and password</p>
+
+<form action="../public/create-account.php" method="post">
+   <label for="Username">First and last name:</label><br>
+   <input name="Username"
+         placeholder="Johan" required><br><br>
+
+  <label for="Password">Password</label><br>
+  <input name="password" type="password"
+          placeholder="•••••••••••••••" required><br><br>
+
+
+  <input type="submit" value="Submit">
+</form>
+
+
+
+<?php require_once "footer.phtml"?>
