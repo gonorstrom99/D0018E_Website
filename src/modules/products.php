@@ -16,7 +16,8 @@ function some_function(): string {
       $return .= "<tr>"
         . "<td>". $row['id'] . "</td>"
         . "<td>". $row['title'] . "</td>"
-        . "<td>". $row['price'] . "</td>\n";
+        . "<td>". $row['price'] . "</td>"
+        . "<td>". $row['quantity'] . "</td>\n";
 
   return $return;
 }

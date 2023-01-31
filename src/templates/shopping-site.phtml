@@ -1,16 +1,22 @@
 <?php require 'header.phtml' ?>
 
-<p>This is the Website for the course literature shop</p>
+<p>Hello world!</p>
 
 <table>
   <tr>
     <th>id</th>
-    <th>title</th>
-    <th>price</th>
+    <th>Title</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th><input type="button" value="Buy" ></th>
   </tr>
+
+
   <?php if (isset($product_table_result)) {
     echo $product_table_result;
   } ?>
+
+
 
 </table>
 
