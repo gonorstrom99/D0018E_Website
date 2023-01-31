@@ -1,0 +1,17 @@
+<?php require 'header.phtml' ?>
+
+<p>This is the Website for the course literature shop</p>
+
+<table>
+  <tr>
+    <th>id</th>
+    <th>title</th>
+    <th>price</th>
+  </tr>
+  <?php if (isset($product_table_result)) {
+    echo $product_table_result;
+  } ?>
+
+</table>
+
+<?php require 'footer.phtml' ?>

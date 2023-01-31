@@ -12,16 +12,16 @@ $header = array(
 );
 
 
-if (isset($_POST["Username"])) {
-  $Username = $_POST["Username"];
-  $Password = $_POST["Password"];
-  echo "Account added";
+if (isset($_POST["Title"])) {
+  $Title = $_POST["Title"];
+  $Price = $_POST["Price"];
+  echo "Book added";
 
-  $sql = "INSERT INTO Account (Username, Password)
+  $sql = "INSERT INTO product_table (Title, Price)
           VALUES (?,?)";
   $stmt = $link->prepare($sql);
-  $stmt->bind_param("ss", $Username, $Password);
+  $stmt->bind_param("ss", $Title, $Price);
   $stmt->execute();
 }
 
-require_once "../templates/create-account.phtml";
+require_once "../templates/add-book.phtml";
