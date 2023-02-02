@@ -8,6 +8,7 @@
             <path value="file://$PROJECT_DIR$/src/public/img" />
             <path value="file://$PROJECT_DIR$/src/public/css" />
             <path value="file://$PROJECT_DIR$/src/public/js" />
+            <path value="file://$PROJECT_DIR$/src/public" />
           </resourceRoots>
         </entryData>
       </entry>

@@ -1,0 +1,26 @@
+<?php require_once "header.phtml"?>
+
+<h2>Login</h2>
+
+<p>Please submit Username and Password</p>
+
+<form action="../public/login-page.php" method="post">
+  <label for="Username">First and last name:</label><br>
+  <label>
+    <input name="Username"
+           placeholder="Johan" required>
+  </label><br><br>
+
+  <label for="Password">Password</label><br>
+  <label>
+    <input name="Password" type="password"
+           placeholder="••••••••••" required>
+  </label><br>
+
+
+  <input type="submit" value="Submit">
+</form>
+
+
+
+<?php require_once "footer.phtml"?>
