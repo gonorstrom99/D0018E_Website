@@ -1,17 +1,22 @@
 <?php require 'header.phtml' ?>
+<section class="section">
 
-<p>Hello world!</p>
+    <h1 class="title">
+      <?php echo $header_attr["title"]?>
+    </h1>
 
- <table>
-   <tr>
-     <th>id</th>
-     <th>title</th>
-     <th>price</th>
-   </tr>
-   <?php if (isset($product_table_result)) {
-     echo $product_table_result;
-   } ?>
+    <p>Hello world!</p>
 
- </table>
+     <table class="table is-striped">
+       <tr>
+         <th>id</th>
+         <th>title</th>
+         <th>price</th>
+       </tr>
+       <?php if (isset($product_table_html)) {
+         echo $product_table_html;
+       } ?>
+
+   </table>
 
 <?php require 'footer.phtml' ?>

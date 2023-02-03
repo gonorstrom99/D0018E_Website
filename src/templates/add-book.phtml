@@ -1,20 +1,47 @@
 <?php require_once "header.phtml"?>
 
-<h2>Add book</h2>
+<section class="section">
+<div class="card">
+  <header class="card-header">
+    <h1 class="card-header-title">Add book</h1>
 
-<p>Please submit title and price</p>
+  </header>
+  <div class="card-content">
+    <form action="#" method="post">
 
-<form action="../public/add-book.php" method="post">
-  <label for="Title">Title:</label><br>
-  <input name="Title" <br><br>
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Title</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <p class="control">
+              <input class="input" name="Title" placeholder="Johan" required>
+            </p>
+          </div>
+        </div>
+      </div>
 
-  <label for="Price">Price</label><br>
-  <input name="Price" type="Price"><br>
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Price</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <p class="control">
+              <input class="input" name="Price" type="number" min="0" value="99" required>
+            </p>
+          </div>
+        </div>
+      </div>
 
+  </div>
+  <footer class="card-footer">
+    <input type="submit" value="Submit" class="card-footer-item is-clickable">
+  </footer>
 
-  <input type="submit" value="Submit">
-</form>
-
+  </form>
+</div>
 
 
 <?php require_once "footer.phtml"?>

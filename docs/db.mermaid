@@ -1,0 +1,32 @@
+classDiagram
+  direction BT
+  class Account {
+    varchar(30) Username
+    text Password
+    int ID  /* User id */
+  }
+  class Admin {
+    int Account_Id
+  }
+  class Comment {
+    text Comment
+    int Rating
+    int Product_id
+    int Account_id
+  }
+  class Shopping_cart {
+    int Quantity
+    int Account_id
+    int Product_id
+  }
+  class product_table {
+    text title
+    float price
+    int id
+  }
+
+  Admin  -->  Account : Account_Id:ID
+  Comment  -->  Account : Account_id:ID
+  Comment  -->  product_table : Product_id:id
+  Shopping_cart  -->  Account : Account_id:ID
+  Shopping_cart  -->  product_table : Product_id:id

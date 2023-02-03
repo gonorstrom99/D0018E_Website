@@ -10,8 +10,17 @@ $header = array(
   "theme-color" => "#fafafa"
 );
 
+$product_table = get_producttable();
+$product_table_html = "";
+foreach ($product_table as $row) {
+  $product_table_html .= "<tr>"
+    ."<td>".$row['id']."</td>"
+    ."<td>".$row['title']."</td>"
+    ."<td>".$row['price']."</td>"
+    ."</tr>";
+}
+
 try {
-  $product_table_result = some_function();
   buy_one(4);
   //ban_literature(3);
 } catch (Exception $e) {

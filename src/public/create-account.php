@@ -1,5 +1,6 @@
 <?php
 require_once "../modules/Database_manager.php";
+require_once "../modules/notification.php";
 $link = Database_manager::get_connection();
 
 $header = array(
@@ -13,9 +14,13 @@ $header = array(
 
 
 if (isset($_POST["Username"])) {
+
+  add_notification(
+    "Account created!",
+    "success"
+  );
   $Username = $_POST["Username"];
   $Password = $_POST["Password"];
-  echo "Account added";
 
   $sql = "INSERT INTO Account (Username, Password)
           VALUES (?,?)";

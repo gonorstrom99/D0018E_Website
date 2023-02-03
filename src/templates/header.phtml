@@ -1,7 +1,11 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="sv">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 <?php
+  require_once "../modules/notification.php";
+
   $default_header = array(
     "title" => "",
     "description" => "",
@@ -10,30 +14,27 @@
     "image" => "",
     "theme-color" => "#fafafa"
   );
-  if (!array_key_exists('header', get_defined_vars()))
-    $header = array();
-
-  if ($header !== null)
-    $header = array_merge($header, $default_header);
+  if (!isset($header_attr))
+    $header_attr = array();
   else
-    $header = $default_header
+    $header_attr = array_merge($default_header, $header_attr);
 ?>
-
 <head>
   <meta charset="utf-8">
-  <title><?php echo $header['title']?></title>
-  <meta name="description" content="<?php echo $header['description']?>">
+  <title><?php echo $header_attr['title']?></title>
+  <meta name="description" content="<?php echo $header_attr['description']?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta property="og:title" content="<?php echo $header['title']?>">
-  <meta property="og:type" content="<?php echo $header['type']?>">
-  <meta property="og:url" content="<?php echo $header['url']?>">
-  <meta property="og:image" content="<?php echo $header['image']?>">
+  <meta property="og:title" content="<?php echo $header_attr['title']?>">
+  <meta property="og:type" content="<?php echo $header_attr['type']?>">
+  <meta property="og:url" content="<?php echo $header_attr['url']?>">
+  <meta property="og:image" content="<?php echo $header_attr['image']?>">
 
   <link rel="manifest" href="../public/site.webmanifest">
   <link rel="apple-touch-icon" href="../public/img/icon.png">
   <!-- Place favicon.ico in the root directory -->
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="../public/css/normalize.css">
   <link rel="stylesheet" href="../public/css/main.css">
 
@@ -42,3 +43,10 @@
 
 
 <body>
+  <?php
+  require_once "navbar.phtml";
+  global $notifications;
+  if (isset($notifications))
+    echo_notification();
+  ?>
+

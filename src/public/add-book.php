@@ -1,5 +1,6 @@
 <?php
 require_once "../modules/Database_manager.php";
+require_once "../modules/notification.php";
 $link = Database_manager::get_connection();
 
 $header = array(
@@ -13,9 +14,12 @@ $header = array(
 
 
 if (isset($_POST["Title"])) {
+  add_notification(
+    "Book added!",
+    "success"
+  );
   $Title = $_POST["Title"];
   $Price = $_POST["Price"];
-  echo "Book added";
 
   $sql = "INSERT INTO product_table (Title, Price)
           VALUES (?,?)";

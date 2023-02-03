@@ -1,0 +1,37 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class Account {
+   Username: varchar(30)
+   Password: text
+   ID  /* User id */: int
+}
+class Admin {
+   Account_Id: int
+}
+class Comment {
+   Comment: text
+   Rating: int
+   Product_id: int
+   Account_id: int
+}
+class Shopping_cart {
+   Quantity: int
+   Account_id: int
+   Product_id: int
+}
+class product_table {
+   title: text
+   price: float
+   id: int
+}
+
+Admin          -[#595959,plain]-^  Account       : "Account_Id:ID"
+Comment        -[#595959,plain]-^  Account       : "Account_id:ID"
+Comment        -[#595959,plain]-^  product_table : "Product_id:id"
+Shopping_cart  -[#595959,plain]-^  Account       : "Account_id:ID"
+Shopping_cart  -[#595959,plain]-^  product_table : "Product_id:id"
+@enduml
