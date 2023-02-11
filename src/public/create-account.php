@@ -1,9 +1,9 @@
 <?php
 require_once "../modules/Database_manager.php";
 require_once "../modules/notification.php";
-$link = Database_manager::get_connection();
+require_once "../modules/Account.php";
 
-$header = array(
+$header_attr = array(
   "title" => "Webshop",
   "description" => "A webshop",
   "type" => "Webpage",
@@ -22,11 +22,7 @@ if (isset($_POST["Username"])) {
   $Username = $_POST["Username"];
   $Password = $_POST["Password"];
 
-  $sql = "INSERT INTO Account (Username, Password)
-          VALUES (?,?)";
-  $stmt = $link->prepare($sql);
-  $stmt->bind_param("ss", $Username, $Password);
-  $stmt->execute();
+  Account::create_account($Username, $Password);
 }
 
 require_once "../templates/create-account.phtml";

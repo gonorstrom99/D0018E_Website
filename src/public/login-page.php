@@ -1,8 +1,8 @@
 <?php
-require_once "../modules/Database_manager.php";
-$link = Database_manager::get_connection();
+require_once "../modules/notification.php";
+require_once "../modules/Account.php";
 
-$header = array(
+$header_attr = array(
   "title" => "Webshop",
   "description" => "A webshop",
   "type" => "Webpage",
@@ -16,13 +16,12 @@ if (isset($_POST["Username"])) {
   $Username = $_POST["Username"];
   $Password = $_POST["Password"];
 
-   $sql = "SELECT ID FROM account WHERE (Username = '$Username') AND (Password = '$Password')";
-
-  $stmt = $link->prepare($sql);
-  $stmt->bind_param("ss", $Username, $Password);
-  $id = $stmt->execute();
-  echo($id);
-
+  $a = Account::login($Username, $Password);
+  if ($a == null) {
+    add_notification("No such account", "danger");
+  }else{
+    header('Location: /');
+  }
 }
 
 require_once "../templates/login-page.phtml";

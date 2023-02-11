@@ -1,7 +1,7 @@
 <?php
 require_once  "../modules/products.php";
 
-$header = array(
+$header_attr = array(
   "title" => "Webshop",
   "description" => "A webshop",
   "type" => "Webpage",

@@ -3,7 +3,7 @@ require_once "../modules/Database_manager.php";
 require_once "../modules/notification.php";
 $link = Database_manager::get_connection();
 
-$header = array(
+$header_attr = array(
   "title" => "Webshop",
   "description" => "A webshop",
   "type" => "Webpage",
@@ -20,11 +20,11 @@ if (isset($_POST["Title"])) {
   );
   $Title = $_POST["Title"];
   $Price = $_POST["Price"];
-
-  $sql = "INSERT INTO product_table (Title, Price)
-          VALUES (?,?)";
+  $Quantity = $_POST["Quantity"];
+  $sql = "INSERT INTO product_table (Title, Price, Quantity)
+          VALUES (?,?,?)";
   $stmt = $link->prepare($sql);
-  $stmt->bind_param("ss", $Title, $Price);
+  $stmt->bind_param("ssi", $Title, $Price, $Quantity);
   $stmt->execute();
 }
 
