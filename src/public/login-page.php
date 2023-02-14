@@ -11,7 +11,6 @@ $header_attr = array(
   "theme-color" => "#fafafa"
 );
 
-
 if (isset($_POST["Username"])) {
   $Username = $_POST["Username"];
   $Password = $_POST["Password"];

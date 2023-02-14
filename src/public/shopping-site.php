@@ -13,17 +13,21 @@ $header_attr = array(
 $product_table = get_producttable();
 $product_table_html = "";
 foreach ($product_table as $row) {
-  $product_table_html .= "<tr>"
+  $product_table_html .=
+    "<tr>"
     ."<td>".$row['id']."</td>"
     ."<td>".$row['title']."</td>"
     ."<td>".$row['price']."</td>"
+    ."<td>".$row['quantity']."</td>"
+    ."<td><input type=\"button\" class=\"button is-small\" name=".$row['id']." value=\"Add to cart\" ></td>"
     ."</tr>";
 }
 
-try {
-  buy_one(4);
-  //ban_literature(3);
-} catch (Exception $e) {
+
+  try {
+    buy_one(4);
+    //ban_literature(3);
+  } catch (Exception $e) {
 }
 
 require_once "../templates/shopping-site.phtml";
