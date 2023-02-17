@@ -1,5 +1,6 @@
 <?php
 require_once "../modules/Account.php";
+require_once "../modules/products.php";
 
 if (isset($_POST['logout'])) {
   Account::logout();
@@ -56,6 +57,33 @@ $a = Account::check_login();
         </div>
       </div>
       <?php else:?>
+      <form method="post">
+        <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Shopping Cart
+        </a>
+
+        <div class="navbar-dropdown">
+          <?php foreach (get_cart($a->getId()) as $item):?>
+          <a class="navbar-item">
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p><strong><?php echo $item['title'].': '. $item['price']?></strong><br>
+                    <input class="input" type="number" min="0" value="<?php echo $item['Quantity']?>">
+                  </p>
+                </div>
+              </div>
+            </article>
+          </a>
+          <?php endforeach; ?>
+          <!--todo: Fix update cart logic-->
+          <a class="navbar-item">
+            <input class="button" name="update-cart" type="submit" value="Update cart">
+          </a>
+        </div>
+      </div>
+      </form>
       <form method="post">
         <div class="navbar-item">
           <div class="buttons">

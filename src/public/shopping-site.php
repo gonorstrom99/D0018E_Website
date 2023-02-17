@@ -1,6 +1,7 @@
 <?php
 require_once  "../modules/products.php";
-
+require_once "../modules/notification.php";
+require_once "../modules/Account.php";
 $header_attr = array(
   "title" => "Webshop",
   "description" => "A webshop",
@@ -9,33 +10,54 @@ $header_attr = array(
   "image" => "",
   "theme-color" => "#fafafa"
 );
+if (isset($_POST['id'])) {
+  add_notification('Bought a '. $_POST['id']);
+  buy_one($_POST['id']);
+}
 
 $product_table = get_producttable();
 $product_table_html = "";
 foreach ($product_table as $row) {
   $product_table_html .=
-    "<tr>"
+
+    "<form action=\"#\" method=\"post\"><tr>"
     ."<td>".$row['id']."</td>"
     ."<td>".$row['title']."</td>"
     ."<td>".$row['price']."</td>"
     ."<td>".$row['quantity']."</td>"
-    ."<td><input type=\"button\" class=\"button is-small\" name=".$row['id']." value=\"Add to cart\" ></td>"
-    ."</tr>";
+    ."<td><input type=\"submit\" class=\"button is-small\" name=\"action\" value=\"Add to cart\" >
+     <input type='hidden' name='id' value='". $row['id']."'></td>"
+    ."</tr></form>";
 }
 
-
-  try {
+/*  try {
     buy_one(4);
     //ban_literature(3);
   } catch (Exception $e) {
-}
+}*/
 
 require_once "../templates/shopping-site.phtml";
 
 function buy_one($id): void{
+  $a = Account::check_login();
+  if ($a == null) {
+    header('Location: /login-page.php');
+  }
+
   $link = Database_manager::get_connection();
   $sql = "UPDATE product_table SET quantity = quantity -1 WHERE d0018e.product_table.id=$id";
   mysqli_query($link, $sql);
+
+  $sql = "INSERT INTO shopping_cart (Account_id, Product_id, Quantity) VALUES (?, ?, 1)
+ON DUPLICATE KEY UPDATE
+  Quantity     = Quantity+1";
+  $stmt = $link->prepare($sql);
+  $accountID = $a->getId();
+  $stmt->bind_param("ii", $accountID, $id);
+  $stmt->execute();
+
+
+
 }
 
 function ban_literature($id): void{
