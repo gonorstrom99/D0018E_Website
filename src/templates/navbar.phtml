@@ -1,12 +1,17 @@
 <?php
 require_once "../modules/Account.php";
 require_once "../modules/products.php";
+require_once "../modules/shopping_cart.php";
 
 if (isset($_POST['logout'])) {
   Account::logout();
 }
-
 $a = Account::check_login();
+if ($a)
+  $id = $a->getId();
+if ($a != null && isset($_POST['update-cart'])) {
+  update_cart($a, $_POST['cart-content']);
+}
 ?>
 
 <nav class="navbar is-spaced has-shadow is-light" role="navigation" aria-label="main navigation">
@@ -29,69 +34,71 @@ $a = Account::check_login();
       </a>
 
       <a class="navbar-item" href="/shopping-site.php">Shop</a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          Admin
-        </a>
-
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="/add-book.php">
-            Add product
+      <?php if ($a != null && $a->isAdmin()) : ?>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Admin
           </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/add-book.php">
+              Add product
+            </a>
+          </div>
         </div>
-      </div>
+      <?php endif; ?>
     </div>
 
 
     <div class="navbar-end">
       <?php if ($a == null) : ?>
-      <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-primary" href="create-account.php">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light" href="login-page.php">
-            Log in
-          </a>
-        </div>
-      </div>
-      <?php else:?>
-      <form method="post">
-        <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          Shopping Cart
-        </a>
-
-        <div class="navbar-dropdown">
-          <?php foreach (get_cart($a->getId()) as $item):?>
-          <a class="navbar-item">
-            <article class="media">
-              <div class="media-content">
-                <div class="content">
-                  <p><strong><?php echo $item['title'].': '. $item['price']?></strong><br>
-                    <input class="input" type="number" min="0" value="<?php echo $item['Quantity']?>">
-                  </p>
-                </div>
-              </div>
-            </article>
-          </a>
-          <?php endforeach; ?>
-          <!--todo: Fix update cart logic-->
-          <a class="navbar-item">
-            <input class="button" name="update-cart" type="submit" value="Update cart">
-          </a>
-        </div>
-      </div>
-      </form>
-      <form method="post">
         <div class="navbar-item">
           <div class="buttons">
-            <input type="submit" name="logout" class="button is-light" value="Log out"/>
+            <a class="button is-primary" href="create-account.php">
+              <strong>Sign up</strong>
+            </a>
+            <a class="button is-light" href="login-page.php">
+              Log in
+            </a>
           </div>
         </div>
-      </form>
-      <?php endif?>
+      <?php else: ?>
+        <form method="post">
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              Shopping Cart
+            </a>
+
+            <div class="navbar-dropdown">
+              <?php foreach (get_cart($id) as $item): ?>
+                <a class="navbar-item">
+                  <article class="media">
+                    <div class="media-content">
+                      <div class="content">
+                        <p><strong><?php echo $item['title'] . ': ' . $item['price'] ?></strong><br>
+                          <input class="input" name="cart-content[<?php echo $item[0] ?>]" type="number" min="0"
+                                 value="<?php echo $item['Quantity'] ?>">
+                        </p>
+                      </div>
+                    </div>
+                  </article>
+                </a>
+              <?php endforeach; ?>
+              <!--todo: Fix update cart logic-->
+              <a class="navbar-item">
+                <input class="button" name="update-cart" type="submit" value="Update cart">
+              </a>
+            </div>
+          </div>
+        </form>
+        <form method="post">
+          <div class="navbar-item">
+            <div class="buttons">
+              <input type="submit" name="logout" class="button is-light" value="Log out"/>
+            </div>
+          </div>
+        </form>
+      <?php endif ?>
     </div>
   </div>
 </nav>

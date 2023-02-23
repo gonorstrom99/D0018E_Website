@@ -1,6 +1,15 @@
 <?php
 require_once "../modules/Database_manager.php";
 require_once "../modules/notification.php";
+require_once "../modules/Account.php";
+
+$account = Account::check_login();
+
+if ($account == null || !$account->isAdmin()) {
+  http_response_code(403);
+  die('Forbidden');
+}
+
 $link = Database_manager::get_connection();
 
 $header_attr = array(
