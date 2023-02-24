@@ -1,0 +1,33 @@
+<?php require_once "header.phtml";
+$id = $_GET['id'];
+
+$link = Database_manager::get_connection();
+$sql = "SELECT title, author,price, active, description, quantity FROM product_table WHERE id = ? LIMIT 1";
+$stmt = $link->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = mysqli_fetch_array($result);
+
+
+?>
+
+<section class="hero">
+  <div class="hero-body">
+    <p class="title">
+      <?php echo $row[0]?>
+    </p>
+    <p class="subtitle">
+      Author: <?php echo $row[1]?>
+    </p>
+  </div>
+
+</section>
+
+<section class="section"><p>
+    <?php echo $row[4]?>
+  </p>
+</section>
+
+
+<?php require_once "footer.phtml"?>

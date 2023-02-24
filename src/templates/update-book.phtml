@@ -1,0 +1,25 @@
+<?php require_once "header.phtml";
+
+?>
+<div>
+  <section class="section">
+
+    <h1 class="title">Update book</h1>
+
+    <table class="table is-striped">
+      <tr>
+        <th>id</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th></th>
+      </tr>
+
+      <?php if (isset($product_table_html)) {
+        echo $product_table_html;
+      } ?>
+
+    </table>
+</div>
+
+<?php require_once "footer.phtml"?>

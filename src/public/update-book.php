@@ -32,26 +32,12 @@ foreach ($product_table as $row) {
     ."<td><a href=\"product.php?id=".$row['id']."\" >".$row['title']."</a></td>"
     ."<td>".$row['price']."</td>"
     ."<td>".$row['quantity']."</td>"
-    ."<td><input type=\"submit\" class=\"button is-small\" name=\"action\" value=\"Delete book\" >
+    ."<td><input type=\"submit\" class=\"button is-small\" name=\"action\" value=\"Update book\" >
      <input type='hidden' name='id' value='". $row['id']."'></td>"
     ."</tr></form>";
+
 }
 
-if (isset($_POST["Title"])) {
-  add_notification(
-    "Book added!",
-    "success"
-  );
-  $Title = $_POST["Title"];
-  $Price = $_POST["Price"];
-  $Quantity = $_POST["Quantity"];
-  $Description = $_POST["Description"];
-  $Author = $_POST["Author"];
-  $sql = "INSERT INTO product_table (Title, Price, Quantity, description, author)
-          VALUES (?,?,?,?,?)";
-  $stmt = $link->prepare($sql);
-  $stmt->bind_param("ssiss", $Title, $Price, $Quantity, $Description, $Author);
-  $stmt->execute();
-}
 
-require_once "../templates/add-book.phtml";
+
+require_once "../templates/update-book.phtml";

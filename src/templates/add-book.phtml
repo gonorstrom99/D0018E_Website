@@ -1,5 +1,6 @@
-<?php require_once "header.phtml"?>
+<?php require_once "header.phtml";
 
+?>
 <section class="section">
 <div class="card">
   <header class="card-header">
@@ -48,6 +49,34 @@
         </div>
       </div>
 
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">description</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <p class="control">
+              <textarea class="textarea" name="Description"
+                        placeholder="Books description"></textarea>
+              <!--<input class="input"  type="text" placeholder="Books description" required>-->
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">author</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <p class="control">
+              <input class="input" name="Author" type="text" placeholder="Ex. Malkolm"required>
+            </p>
+          </div>
+        </div>
+      </div>
+
   </div>
   <footer class="card-footer">
     <input type="submit" value="Submit" class="card-footer-item is-clickable">
@@ -55,6 +84,5 @@
 
   </form>
 </div>
-
 
 <?php require_once "footer.phtml"?>
