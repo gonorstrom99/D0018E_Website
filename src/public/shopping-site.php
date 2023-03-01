@@ -10,18 +10,20 @@ $header_attr = array(
   "image" => "",
   "theme-color" => "#fafafa"
 );
-if (isset($_POST['id'])) {
-  add_notification('Bought a '. $_POST['id']);
-  buy_one($_POST['id']);
-}
 
 $product_table = get_producttable();
 $product_table_html = "";
+
+if (isset($_POST['id'])) {
+
+  add_notification('Bought '. $product_table[$_POST['id']]['title']);
+  buy_one($_POST['id']);
+}
+
 foreach ($product_table as $row) {
   $product_table_html .=
 
     "<form action=\"#\" method=\"post\"><tr>"
-    ."<td>".$row['id']."</td>"
     ."<td><a href=\"product.php?id=".$row['id']."\" >".$row['title']."</a></td>"
     ."<td>".$row['price']."</td>"
     ."<td>".$row['quantity']."</td>"

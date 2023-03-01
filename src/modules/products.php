@@ -13,7 +13,24 @@ function get_producttable(): array {
 
   if (mysqli_num_rows($result) > 0)
     while($row = mysqli_fetch_array($result))
-      array_push($return, $row);
+      $return[$row['id']] = $row;
+
+  return $return;
+}
+
+function get_comments($Product_id): array {
+  $link = Database_manager::get_connection();
+  $sql = "SELECT * FROM comment JOIN account  ON account.id = comment.Account_id
+            WHERE Product_id = ? ORDER BY datetime ASC";
+  $stmt = $link->prepare($sql);
+  $stmt->bind_param("i", $Product_id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $return = Array();
+
+  if (mysqli_num_rows($result) > 0)
+    while($row = mysqli_fetch_array($result))
+      $return[] = $row;
 
   return $return;
 }

@@ -1,0 +1,25 @@
+<?php
+assert(isset($comment))
+
+?>
+
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-64x64">
+      <img src="https://bulma.io/images/placeholders/128x128.png">
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <strong><?php echo $comment['Username']; echo ": ".$comment['Rating']."/5";?> </strong>
+        <br>
+        <?php echo $comment['Comment']?>
+      </p>
+    </div>
+
+  </div>
+  <div class="media-right">
+    <button class="delete"></button>
+  </div>
+</article>

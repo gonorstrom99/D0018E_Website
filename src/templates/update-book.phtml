@@ -1,25 +1,91 @@
 <?php require_once "header.phtml";
 
+assert(isset($product));
 ?>
-<div>
-  <section class="section">
+<section class="section">
+  <div class="card">
+    <header class="card-header">
+      <h1 class="card-header-title">Edit book: <?php echo $product['title']; ?></h1>
 
-    <h1 class="title">Update book</h1>
+    </header>
+    <div class="card-content">
+      <form action="#" method="post">
 
-    <table class="table is-striped">
-      <tr>
-        <th>id</th>
-        <th>Title</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th></th>
-      </tr>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Title</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control">
+                <input class="input" name="Title" placeholder="Johan" value="<?php echo $product['title']; ?>" required>
+              </p>
+            </div>
+          </div>
+        </div>
 
-      <?php if (isset($product_table_html)) {
-        echo $product_table_html;
-      } ?>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Price</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control">
+                <input class="input" name="Price" type="number" min="0" value="<?php echo $product['price']; ?>" required>
+              </p>
+            </div>
+          </div>
+        </div>
 
-    </table>
-</div>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Quantity</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control">
+                <input class="input" name="Quantity" type="number" min="0" value="<?php echo $product['quantity']; ?>" required>
+              </p>
+            </div>
+          </div>
+        </div>
 
-<?php require_once "footer.phtml"?>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">description</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control">
+              <textarea class="textarea" name="Description"
+                        placeholder="Books description"><?php echo $product['description']; ?></textarea>
+                <!--<input class="input"  type="text" placeholder="Books description" required>-->
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">author</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control">
+                <input class="input" name="Author" type="text" placeholder="Ex. Malkolm"
+                       value="<?php echo $product['author']; ?>" required>
+              </p>
+            </div>
+          </div>
+        </div>
+
+    </div>
+    <footer class="card-footer">
+      <input type="hidden" name="id" value="<?php echo $product['id']; ?>" class="hidden">
+      <input type="submit" value="Submit" class="card-footer-item is-clickable">
+    </footer>
+
+    </form>
+  </div>
+
+  <?php require_once "footer.phtml"?>

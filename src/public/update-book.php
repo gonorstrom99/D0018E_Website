@@ -22,22 +22,29 @@ $header_attr = array(
   "theme-color" => "#fafafa"
 );
 
-$product_table = get_producttable();
-$product_table_html = "";
-foreach ($product_table as $row) {
-  $product_table_html .=
+$product = array();
+if (isset($_GET['id'])) {
 
-    "<form action=\"#\" method=\"post\"><tr>"
-    ."<td>".$row['id']."</td>"
-    ."<td><a href=\"product.php?id=".$row['id']."\" >".$row['title']."</a></td>"
-    ."<td>".$row['price']."</td>"
-    ."<td>".$row['quantity']."</td>"
-    ."<td><input type=\"submit\" class=\"button is-small\" name=\"action\" value=\"Update book\" >
-     <input type='hidden' name='id' value='". $row['id']."'></td>"
-    ."</tr></form>";
+  $sql = "SELECT * FROM product_table WHERE id = ?";
+  $stmt = $link->prepare($sql);
+  $stmt->bind_param("i", $_GET['id']);
+  $stmt->execute();
 
+  $product = $stmt->get_result()->fetch_array();
+} else if (isset($_POST["id"])) {
+  add_notification(
+    "Book edited!",
+    "success"
+  );
+  $sql = "UPDATE product_table SET title = ?, price = ?, quantity = ?, description = ?, author = ? WHERE id = ?";
+  $stmt = $link->prepare($sql);
+  $stmt->bind_param("ssissi", $_POST['Title'], $_POST['Price'],
+    $_POST['Quantity'], $_POST['Description'], $_POST['Author'], $_POST['id']);
+  $stmt->execute();
+  header('Location: /');
+} else {
+  header('Location: /');
 }
-
 
 
 require_once "../templates/update-book.phtml";

@@ -22,9 +22,11 @@ $header_attr = array(
   "theme-color" => "#fafafa"
 );
 
-if (isset($_POST['id'])) {
-  add_notification('Bought a '. $_POST['id']);
+if (isset($_POST['delete'])) {
+  add_notification('Deleted '. $_POST['id']);
   ban_literature($_POST['id']);
+} else if (isset($_POST['update'])) {
+  header('Location: /update-book.php?id='.$_POST['id']);
 }
 
 $product_table = get_producttable();
@@ -37,8 +39,9 @@ foreach ($product_table as $row) {
     ."<td><a href=\"product.php?id=".$row['id']."\" >".$row['title']."</a></td>"
     ."<td>".$row['price']."</td>"
     ."<td>".$row['quantity']."</td>"
-    ."<td><input type=\"submit\" class=\"button is-small\" name=\"action\" value=\"Delete book\" >
-     <input type='hidden' name='id' value='". $row['id']."'></td>"
+    ."<td><input type=\"submit\" class=\"button is-small\" name=\"delete\" value=\"Delete book\" >"
+    ."<input type=\"submit\" class=\"button is-small\" name=\"update\" value=\"Edit book\" >"
+    ."<input type='hidden' name='id' value='". $row['id']."'></td>"
     ."</tr></form>";
 }
 
@@ -48,4 +51,4 @@ function ban_literature($id): void{
   mysqli_query($link, $sql);
 }
 
-require_once "../templates/delete-book.phtml";
+require_once "../templates/admin.phtml";

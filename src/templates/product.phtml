@@ -14,20 +14,31 @@ $row = mysqli_fetch_array($result);
 
 <section class="hero">
   <div class="hero-body">
-    <p class="title">
+    <h1 class="title">
       <?php echo $row[0]?>
-    </p>
-    <p class="subtitle">
+    </h1>
+    <h2 class="subtitle">
       Author: <?php echo $row[1]?>
-    </p>
+    </h2>
   </div>
 
 </section>
 
-<section class="section"><p>
+<section class="section">
+  <p>
     <?php echo $row[4]?>
   </p>
 </section>
+<section class="section is-small">
+  <h2 class="subtitle">Comments</h2>
+  <?php
+  $comments = get_comments($id);
+  foreach ($comments as $comment) {
+    require "comments.phtml";
+  }?>
+</section>
+
+
 
 
 <?php require_once "footer.phtml"?>

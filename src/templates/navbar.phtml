@@ -36,19 +36,13 @@ if ($a != null && isset($_POST['update-cart'])) {
       <a class="navbar-item" href="/shopping-site.php">Shop</a>
       <?php if ($a != null && $a->isAdmin()) : ?>
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
+          <a class="navbar-link" href="/admin.php">
             Admin
           </a>
 
           <div class="navbar-dropdown">
             <a class="navbar-item" href="/add-book.php">
               Add product
-            </a>
-            <a class="navbar-item" href="/delete-book.php">
-              Delete book
-            </a>
-            <a class="navbar-item" href="/update-book.php">
-              Update book
             </a>
           </div>
         </div>
