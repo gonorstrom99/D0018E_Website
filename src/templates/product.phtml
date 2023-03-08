@@ -1,15 +1,7 @@
 <?php require_once "header.phtml";
-$id = $_GET['id'];
-
-$link = Database_manager::get_connection();
-$sql = "SELECT title, author,price, active, description, quantity FROM product_table WHERE id = ? LIMIT 1";
-$stmt = $link->prepare($sql);
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$result = $stmt->get_result();
-$row = mysqli_fetch_array($result);
-
-
+assert(isset($row));
+assert(isset($id));
+assert(isset($comments));
 ?>
 
 <section class="hero">
@@ -32,11 +24,61 @@ $row = mysqli_fetch_array($result);
 <section class="section is-small">
   <h2 class="subtitle">Comments</h2>
   <?php
-  $comments = get_comments($id);
   foreach ($comments as $comment) {
     require "comments.phtml";
   }?>
+  <article class="media">
+    <figure class="media-left">
+      <p class="image is-64x64">
+        <img src="https://bulma.io/images/placeholders/128x128.png">
+      </p>
+    </figure>
+    <div class="media-content">
+      <form method="post">
+        <div class="field">
+          <p class="control">
+            <textarea class="textarea" name="comment" placeholder="Add a comment..."></textarea>
+          </p>
+        </div>
+        <nav class="level">
+          <div class="level-left">
+            <div class="level-item">
+              <input type="submit" class="button is-info" value="Submit">
+            </div>
+          </div>
+          <div class="level-right">
+            <div class="level-item">
+              <div class="control">
+                Rating:
+                <label class="radio">
+                  <input type="radio" name="rating" value="1">
+                  1
+                </label>
+                <label class="radio">
+                  <input type="radio" name="rating" value="2">
+                  2
+                </label>
+                <label class="radio">
+                  <input type="radio" name="rating" value="3" checked>
+                  3
+                </label>
+                <label class="radio">
+                  <input type="radio" name="rating" value="4">
+                  4
+                </label>
+                <label class="radio">
+                  <input type="radio" name="rating" value="5">
+                  5
+                </label>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </form>
+    </div>
+  </article>
 </section>
+
 
 
 

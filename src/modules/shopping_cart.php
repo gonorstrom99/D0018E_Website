@@ -36,6 +36,30 @@ function update_cart(Account $a, Array $cart) {
       }
     }
   }
-
   add_notification("Updated cart", "success");
+}
+function create_order(Account $a):int|null{
+  $id = $a->getId();
+
+  $link = Database_manager::get_connection();
+  $sql = "SELECT shopping_cart.Product_id, shopping_cart.Quantity, product_table.price
+            FROM shopping_cart JOIN product_table ON shopping_cart.Product_id = product_table.id
+            WHERE Account_Id = ?";
+  $stmt = $link->prepare($sql);
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+
+  if($result->num_rows){
+    $sql = "CALL create_order(?)";
+    $stmt = $link->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+
+    add_notification("Created order!", "success");
+  } else {
+    add_notification("Couldn't create order", "danger");
+  }
+
+  return null;
 }

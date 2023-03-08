@@ -9,8 +9,12 @@ if (isset($_POST['logout'])) {
 $a = Account::check_login();
 if ($a)
   $id = $a->getId();
-if ($a != null && isset($_POST['update-cart'])) {
-  update_cart($a, $_POST['cart-content']);
+if ($a != null) {
+  if (isset($_POST['update-cart'])) {
+    update_cart($a, $_POST['cart-content']);
+  } elseif (isset($_POST['create-order'])) {
+    create_order($a);
+  }
 }
 ?>
 
@@ -84,9 +88,9 @@ if ($a != null && isset($_POST['update-cart'])) {
                   </article>
                 </a>
               <?php endforeach; ?>
-              <!--todo: Fix update cart logic-->
               <a class="navbar-item">
                 <input class="button" name="update-cart" type="submit" value="Update cart">
+                <input class="button" name="create-order" type="submit" value="Create order">
               </a>
             </div>
           </div>
