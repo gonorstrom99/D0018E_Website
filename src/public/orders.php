@@ -6,7 +6,7 @@ require_once  "../modules/products.php";
 
 $account = Account::check_login();
 
-if ($account == null || !$account->isAdmin()) {
+if ($account == null) {
   http_response_code(403);
   die('Forbidden');
 }
@@ -22,24 +22,18 @@ $header_attr = array(
   "theme-color" => "#fafafa"
 );
 
-if (isset($_POST['edit_order'])) {
-  header('Location: /orders.php?Order_id='.$_POST['Order_id']);
-}
+$orders = null;
+if ($account->isAdmin()) {
+  if (isset($_POST['edit-status'])) {
+    $sql = "UPDATE orders SET Order_status = ? WHERE Order_id = ?";
+    $stmt = $link->prepare($sql);
+    $stmt->bind_param("si", $_POST['orderstatus'], $_POST['orderid']);
+    $stmt->execute();
 
-$order_content_table = get_order_content_table();
-$order_table_html = "";
-foreach ($order_content_table as $row) {
-  $order_table_html .=
-
-    "<form action=\"#\" method=\"post\"><tr>"
-    ."<td>".$row['Order_id']."</td>"
-    ."<td>".$row['Product_id']."</a></td>"
-    ."<td>".$row['Quantity']."</td>"
-    ."<td>".$row['Price']."</td>"
-    ."<td>"
-    ."<input type=\"submit\" class=\"button is-small\" name=\"edit_order\" value=\"Edit Order\" >"
-    ."<input type='hidden' name='id' value='". $row['Order_id']."'></td>"
-    ."</tr></form>";
-}
+    echo "<meta http-equiv='refresh' content='0'>";
+  }
+  $orders = get_orders(null);
+} else
+  $orders = get_orders($account->getId());
 
 require_once "../templates/orders.phtml";

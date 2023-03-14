@@ -1,24 +1,53 @@
 <?php require_once "header.phtml";
+assert(isset($orders));
+require_once "../modules/Account.php";
 
+$account = Account::check_login();
 ?>
 <section class="section">
   <div>
-    <h1 class="title">Admin</h1>
+    <h1 class="title">Orders</h1>
 
     <table class="table is-striped">
       <tr>
         <th>Order id</th>
-        <th>Product id</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th></th>
+        <?php if ($account->isAdmin()): ?>
+          <th>User</th>
+        <?php endif; ?>
+        <th>Order status</th>
       </tr>
 
-      <?php if (isset($order_table_html)) {
-        echo $order_table_html;
-      } ?>
+      <?php foreach ($orders as $order): ?>
+        <form action="#" method="post">
+          <tr>
+            <td><a href="order.php?id=<?php echo $order['Order_id'] ?>"><?php echo $order['Order_id'] ?></a></td>
+            <?php if ($account->isAdmin()): ?>
+              <td><?php echo $order['Username'] ?></td>
+            <td>
+              <div class="field has-addons">
+                <p class="control">
+                  <span class="select">
+                    <select name="orderstatus">
+                      <option <?php if ($order['Order_status'] == 'Created') echo "selected = 1"?> value="Created">Created</option>
+                      <option <?php if ($order['Order_status'] == 'Shipped') echo "selected = 1"?> value="Shipped">Shipped</option>
+                      <option <?php if ($order['Order_status'] == 'Received') echo "selected = 1"?> ="Received">Received</option>
+                    </select>
+                  </span>
+                </>
+                <p class="control">
+                  <input type="hidden" name="orderid" value="<?php echo $order['Order_id'] ?>">
+                  <input type="submit" name="edit-status" value="Edit Status" class="button">
+                </p>
+              </div>
+            </td>
+            <?php else: ?>
+              <td><?php echo $order['Order_status'] ?></td>
+            <?php endif; ?>
+          </tr>
+        </form>
+      <?php endforeach; ?>
 
     </table>
   </div>
 
-  <?php require_once "footer.phtml"?>
+  <?php require_once "footer.phtml" ?>

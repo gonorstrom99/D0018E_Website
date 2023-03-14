@@ -1,0 +1,27 @@
+<?php require_once "header.phtml";
+
+assert(isset($order));
+assert(isset($order_contents));
+?>
+<section class="section">
+  <h1 class="title">Order: <?php echo $order['Order_id']?></h1>
+  <h2 class="subtitle">Status: <?php echo $order['Order_status']?></h2>
+
+  <table class="table is-striped">
+    <tr>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Quantity</th>
+    </tr>
+
+    <?php foreach ($order_contents as $row):?>
+      <tr>
+        <td><a href="product.php?id=<?php echo $row['Product_id']?>"><?php echo $row['title']?></a></td>
+        <td><?php echo $row['Price']?></td>
+        <td><?php echo $row['Quantity']?></td>
+      </tr>
+    <?php endforeach ?>
+  </table>
+</section>
+
+<?php require_once "footer.phtml" ?>

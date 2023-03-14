@@ -1,0 +1,58 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype polyline
+
+class account {
+   Username: varchar(30)
+   Password: varchar(64)
+   ID  /* User id */: int
+}
+class admin {
+   Account_Id: int
+}
+class comment {
+   Comment: text
+   Rating: int
+   Product_id: int
+   Account_id: int
+}
+class cookies {
+   Account_id: int
+   Cookie: varchar(64)
+}
+class order_content {
+   Quantity: int
+   Price: int
+   Order_id: int
+   Product_id: int
+}
+class orders {
+   Account_id: int
+   Date: date
+   Order_id: int
+}
+class product_table {
+   title: text
+   price: float
+   quantity: int
+   active: tinyint(1)
+   id: int
+}
+class shopping_cart {
+   Quantity: int
+   Account_id: int
+   Product_id: int
+}
+
+admin          -[#595959,plain]-^  account       : "Account_Id:ID"
+comment        -[#595959,plain]-^  account       : "Account_id:ID"
+comment        -[#595959,plain]-^  product_table : "Product_id:id"
+cookies        -[#595959,plain]-^  account       : "Account_id:ID"
+order_content  -[#595959,plain]-^  orders        : "Order_id"
+order_content  -[#595959,plain]-^  product_table : "Product_id:id"
+orders         -[#595959,plain]-^  account       : "Account_id:ID"
+shopping_cart  -[#595959,plain]-^  account       : "Account_id:ID"
+shopping_cart  -[#595959,plain]-^  product_table : "Product_id:id"
+@enduml

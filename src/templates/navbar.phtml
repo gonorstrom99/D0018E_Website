@@ -38,6 +38,10 @@ if ($a != null) {
       </a>
 
       <a class="navbar-item" href="/shopping-site.php">Shop</a>
+
+      <a class="navbar-item" href="/orders.php">
+        Orders
+      </a>
       <?php if ($a != null && $a->isAdmin()) : ?>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="/admin.php">
@@ -47,9 +51,6 @@ if ($a != null) {
           <div class="navbar-dropdown">
             <a class="navbar-item" href="/add-book.php">
               Add product
-            </a>
-            <a class="navbar-item" href="/orders.php">
-              Orders
             </a>
           </div>
 

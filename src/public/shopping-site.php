@@ -16,8 +16,13 @@ $product_table_html = "";
 
 if (isset($_POST['id'])) {
 
-  add_notification('Bought '. $product_table[$_POST['id']]['title']);
-  buy_one($_POST['id']);
+
+  try {
+    buy_one($_POST['id']);
+    add_notification('Bought '. $product_table[$_POST['id']]['title']);
+  }catch (mysqli_sql_exception) {
+    add_notification("The book \"".$product_table[$_POST['id']]['title']."\" is out of stock");
+  }
 }
 
 foreach ($product_table as $row) {
