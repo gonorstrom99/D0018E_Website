@@ -18,6 +18,19 @@ function get_producttable(): array {
   return $return;
 }
 
+function get_order_content_table(): array {
+  $link = Database_manager::get_connection();
+  $sql = "SELECT * FROM order_content";
+  $result = mysqli_query($link, $sql);
+  $return = array();
+
+  if (mysqli_num_rows($result) > 0)
+    while($row = mysqli_fetch_array($result))
+      $return[$row['Order_id']] = $row;
+
+  return $return;
+}
+
 function get_comments($Product_id): array {
   $link = Database_manager::get_connection();
   $sql = "SELECT * FROM comment JOIN account  ON account.id = comment.Account_id

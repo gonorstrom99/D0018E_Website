@@ -32,6 +32,8 @@ foreach ($product_table as $row) {
     ."</tr></form>";
 }
 
+
+
 /*  try {
     buy_one(4);
     //ban_literature(3);
@@ -58,6 +60,7 @@ ON DUPLICATE KEY UPDATE
   $stmt->bind_param("ii", $accountID, $id);
   $stmt->execute();
 
+  echo "<meta http-equiv='refresh' content='0'>";
 }
 
 function ban_literature($id): void{

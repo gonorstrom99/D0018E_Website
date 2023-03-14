@@ -31,7 +31,8 @@ assert(isset($product));
           <div class="field-body">
             <div class="field">
               <p class="control">
-                <input class="input" name="Price" type="number" min="0" value="<?php echo $product['price']; ?>" required>
+                <input class="input" name="Price" type="number" min="0" value="<?php echo $product['price']; ?>"
+                       required>
               </p>
             </div>
           </div>
@@ -44,7 +45,8 @@ assert(isset($product));
           <div class="field-body">
             <div class="field">
               <p class="control">
-                <input class="input" name="Quantity" type="number" min="0" value="<?php echo $product['quantity']; ?>" required>
+                <input class="input" name="Quantity" type="number" min="0" value="<?php echo $product['quantity']; ?>"
+                       required>
               </p>
             </div>
           </div>
@@ -58,7 +60,7 @@ assert(isset($product));
             <div class="field">
               <p class="control">
               <textarea class="textarea" name="Description"
-                        placeholder="Books description"><?php echo $product['description']; ?></textarea>
+                        placeholder="Books Description"><?php echo $product['description']; ?></textarea>
                 <!--<input class="input"  type="text" placeholder="Books description" required>-->
               </p>
             </div>
@@ -78,14 +80,14 @@ assert(isset($product));
             </div>
           </div>
         </div>
-
+        <footer class="card-footer">
+          <input type="hidden" name="id" value="<?php echo $product['id']; ?>" class="hidden">
+          <input type="submit" value="Submit" class="card-footer-item is-clickable">
+        </footer>
+      </form>
     </div>
-    <footer class="card-footer">
-      <input type="hidden" name="id" value="<?php echo $product['id']; ?>" class="hidden">
-      <input type="submit" value="Submit" class="card-footer-item is-clickable">
-    </footer>
 
-    </form>
+
   </div>
 
-  <?php require_once "footer.phtml"?>
+  <?php require_once "footer.phtml" ?>

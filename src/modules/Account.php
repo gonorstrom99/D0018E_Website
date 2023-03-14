@@ -116,13 +116,13 @@ class Account {
     return null;
   }
 
-  static function create_account($Username, $Password): Account {
+  static function create_account($Username, $Password, $Fullname): Account {
     $link = Database_manager::get_connection();
 
-    $sql = "INSERT INTO Account (Username, Password)
-          VALUES (?,?)";
+    $sql = "INSERT INTO Account (Username, Password, Fullname)
+          VALUES (?,?,?)";
     $stmt = $link->prepare($sql);
-    $stmt->bind_param("ss", $Username, $Password);
+    $stmt->bind_param("sss", $Username, $Password, $Fullname);
     $stmt->execute();
 
     $sql = "SELECT ID FROM Account WHERE Username = ? AND Password = ?";
@@ -131,7 +131,6 @@ class Account {
     $stmt->execute();
     $r = $stmt->get_result();
 
-    // TODO: Get ID
     $a = new Account($r->fetch_row()[0], $Username);
     $a->create_cookie();
     return $a;

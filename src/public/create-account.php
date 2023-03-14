@@ -19,10 +19,12 @@ if (isset($_POST["Username"])) {
     "Account created!",
     "success"
   );
+  $Fullname = $_POST["Fullname"];
   $Username = $_POST["Username"];
   $Password = $_POST["Password"];
 
-  Account::create_account($Username, $Password);
+  Account::create_account($Username, $Password, $Fullname);
+  header('Location: /');
 }
 
 require_once "../templates/create-account.phtml";
